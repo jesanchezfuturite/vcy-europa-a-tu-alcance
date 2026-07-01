@@ -1,0 +1,59 @@
+---
+const faqs = [
+  {
+    q: "¿Necesito visa para este viaje?",
+    a: "No, para la ruta de Europa a tu Alcance 2027 que incluye España, Francia, Suiza e Italia no requieres visa siendo ciudadano mexicano. Solo necesitas tu pasaporte vigente."
+  },
+  {
+    q: "¿Cómo funciona el esquema de apartado?",
+    a: "Puedes reservar tu lugar con solo $5,500 MXN e ir realizando abonos a tu propio ritmo de forma cómoda."
+  },
+  {
+    q: "¿Cuándo debe estar liquidado el paquete?",
+    a: "El total del viaje debe estar cubierto al 100% como mínimo 60 días antes de la fecha de salida."
+  },
+  {
+    q: "¿Cuáles son los métodos de pago?",
+    a: "Aceptamos pagos en efectivo y transferencias bancarias. Es un esquema ideal para planificar sin necesidad de tarjetas de crédito o financiamientos complejos."
+  },
+  {
+    q: "¿Qué pasa si viajo solo?",
+    a: "El precio base publicado es por persona en habitación doble. Si viajas solo, te podemos asignar un compañero de habitación del grupo o puedes solicitar una tarifa con suplemento para habitación individual."
+  },
+  {
+    q: "¿Cuánto equipaje tengo permitido?",
+    a: "Tu tarifa ya te incluye equipaje completo: una maleta documentada de 23 kg, una maleta de mano de 8 kg y un objeto personal a bordo."
+  }
+];
+---
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800 uppercase tracking-tight">
+      PREGUNTAS FRECUENTES
+    </h2>
+
+    <div class="space-y-4">
+      {faqs.map(faq => (
+        <details class="group bg-gray-50 rounded-2xl border border-gray-200 transition-all duration-300 open:bg-purple-deep/5">
+          <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-lg text-gray-800 list-none">
+            {faq.q}
+            <span class="text-purple-deep transition-transform duration-300 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-6 pb-6 text-gray-600 leading-relaxed">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

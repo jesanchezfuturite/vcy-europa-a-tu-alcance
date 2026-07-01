@@ -1,0 +1,43 @@
+---
+const supports = [
+  {
+    title: "Guía desde México",
+    description: "Un coordinador de nuestro equipo viaja con el grupo todo el trayecto.",
+    icon: "🇲🇽"
+  },
+  {
+    title: "Expertos locales",
+    description: "Guías oficiales en español en cada ciudad para que no tengas barreras de idioma.",
+    icon: "🗣️"
+  },
+  {
+    title: "Autocar de gran lujo",
+    description: "Traslados privados entre países; olvídate de trenes o cargar maletas en el metro.",
+    icon: "🚌"
+  },
+  {
+    title: "Asistencia 24/7",
+    description: "Soporte personalizado antes y durante cada día de tu viaje por Europa.",
+    icon: "🛡️"
+  }
+];
+---
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800 uppercase tracking-tight">
+      EL RESPALDO QUE NECESITAS AL VIAJAR LEJOS
+    </h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {supports.map(support => (
+        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+          <div class="text-4xl mb-6">{support.icon}</div>
+          <h3 class="text-xl font-bold mb-4 text-purple-deep">{support.title}</h3>
+          <p class="text-gray-600 leading-relaxed">
+            {support.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

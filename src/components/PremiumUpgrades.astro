@@ -1,0 +1,36 @@
+---
+const upgrades = [
+  { name: "Iluminaciones de París", price: "$1,050 MXN" },
+  { name: "Palacio y Jardines de Versalles", price: "$2,100 MXN" },
+  { name: "Paseo en Góndola en Venecia", price: "$990 MXN" },
+  { name: "Roma Barroca", price: "$900 MXN" },
+  { name: "Museos Vaticanos y Capilla Sixtina", price: "$1,800 MXN" }
+];
+---
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 uppercase tracking-tight mb-4">
+        HAZ TU VIAJE TODAVÍA MÁS TUYO
+      </h2>
+      <p class="text-lg text-gray-600">
+        Estas experiencias no están incluidas en el paquete básico y requieren reserva anticipada.
+      </p>
+    </div>
+
+    <div class="bg-gray-50 rounded-3xl overflow-hidden border border-gray-200 shadow-inner">
+      <div class="divide-y divide-gray-200">
+        {upgrades.map(item => (
+          <div class="flex flex-col sm:flex-row justify-between items-center p-6 sm:p-8 hover:bg-purple-deep/5 transition-colors">
+            <span class="text-xl font-semibold text-gray-800 mb-2 sm:mb-0">{item.name}</span>
+            <span class="text-2xl font-bold text-purple-deep">{item.price}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <p class="mt-8 text-center text-sm text-gray-500 italic">
+      Nota: Los precios en pesos son informativos y calculados bajo el tipo de cambio vigente al momento de su liquidación.
+    </p>
+  </div>
+</section>

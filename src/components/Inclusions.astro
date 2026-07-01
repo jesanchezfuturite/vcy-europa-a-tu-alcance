@@ -1,0 +1,62 @@
+---
+const includes = [
+  "Vuelo redondo desde CDMX a Madrid.",
+  "15 noches de hospedaje seleccionado.",
+  "Desayuno diario incluido.",
+  "Equipaje completo: Documentado (23 kg) + Mano (8 kg) + Objeto personal.",
+  "Todos los traslados aeropuerto-hotel-aeropuerto.",
+  "Autocar de gran lujo para toda la ruta.",
+  "Guías en español (acompañante y locales).",
+  "Asistencia 24/7 antes y durante el viaje."
+];
+
+const excludes = [
+  "Excursiones opcionales.",
+  "Comidas y cenas.",
+  "Gastos personales y souvenirs.",
+  "Propinas y tasas hoteleras locales.",
+  "Seguros médicos o visados.",
+  "Cualquier servicio no especificado."
+];
+---
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800 uppercase tracking-tight">
+      LO QUE INCLUYE TU VIAJE
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- Includes -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg border-t-4 border-green-500">
+        <h3 class="text-2xl font-bold mb-8 flex items-center text-green-700">
+          <span class="mr-3 bg-green-100 p-2 rounded-lg">✅</span>
+          Incluye:
+        </h3>
+        <ul class="space-y-4">
+          {includes.map(item => (
+            <li class="flex items-start text-gray-700">
+              <span class="text-green-500 mr-3 mt-1 font-bold">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Not Includes -->
+      <div class="bg-white p-8 rounded-3xl shadow-lg border-t-4 border-red-500 opacity-90">
+        <h3 class="text-2xl font-bold mb-8 flex items-center text-red-700">
+          <span class="mr-3 bg-red-100 p-2 rounded-lg">❌</span>
+          No incluye:
+        </h3>
+        <ul class="space-y-4">
+          {excludes.map(item => (
+            <li class="flex items-start text-gray-600">
+              <span class="text-red-400 mr-3 mt-1 font-bold">×</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
