@@ -1,0 +1,68 @@
+---
+---
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6">
+  <div class="container mx-auto px-4 flex justify-between items-center">
+    <!-- Creative Logo Container -->
+    <a href="#" class="relative group block">
+      <!-- Glow Container -->
+      <div class="absolute inset-0 bg-white/20 blur-2xl rounded-full scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+      
+      <img 
+        src="/images/vcy-logo.webp" 
+        alt="VCY Logo" 
+        class="h-32 md:h-44 relative transition-all duration-500 group-hover:scale-105 logo-glow"
+      />
+    </a>
+
+    <!-- Simple Navigation for CRO -->
+    <nav>
+      <a 
+        href="#formulario-contacto" 
+        class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-purple-deep transition-all shadow-lg"
+      >
+        Reservar ahora
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('bg-white/90', 'backdrop-blur-lg', 'shadow-xl', 'py-3');
+      header?.classList.remove('py-6');
+      // Change logo appearance if needed via CSS classes
+    } else {
+      header?.classList.remove('bg-white/90', 'backdrop-blur-lg', 'shadow-xl', 'py-3');
+      header?.classList.add('py-6');
+    }
+  });
+</script>
+
+<style>
+  #main-header.bg-white\/90 nav a {
+    color: #5b4a7a;
+    border-color: #5b4a7a / 20;
+  }
+  #main-header.bg-white\/90 nav a:hover {
+    background-color: #5b4a7a;
+    color: white;
+  }
+  .bg-gradient-radial {
+    background: radial-gradient(var(--tw-gradient-stops));
+  }
+  .logo-glow {
+    filter: 
+      drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))
+      drop-shadow(0 0 15px rgba(91, 74, 122, 0.3));
+    transition: filter 0.5s ease;
+  }
+  .group:hover .logo-glow {
+    filter: 
+      drop-shadow(0 0 3px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 12px rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 25px rgba(91, 74, 122, 0.5));
+  }
+</style>
