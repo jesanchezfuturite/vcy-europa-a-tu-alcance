@@ -1,6 +1,6 @@
 ---
 ---
-<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-6">
+<header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 md:py-6">
   <div class="container mx-auto px-4 flex justify-between items-center">
     <!-- Creative Logo Container -->
     <a href="#" class="relative group block">
@@ -10,7 +10,7 @@
       <img 
         src="/images/vcy-logo.webp" 
         alt="VCY Logo" 
-        class="h-16 md:h-44 relative transition-all duration-500 group-hover:scale-105 logo-glow"
+        class="h-12 md:h-44 relative transition-all duration-500 group-hover:scale-105 logo-glow"
       />
     </a>
 
@@ -30,12 +30,11 @@
   const header = document.getElementById('main-header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-      header?.classList.add('bg-white/90', 'backdrop-blur-lg', 'shadow-xl', 'py-3');
-      header?.classList.remove('py-6');
-      // Change logo appearance if needed via CSS classes
+      header?.classList.add('bg-white/90', 'backdrop-blur-lg', 'shadow-xl', 'py-2');
+      header?.classList.remove('py-3', 'md:py-6');
     } else {
-      header?.classList.remove('bg-white/90', 'backdrop-blur-lg', 'shadow-xl', 'py-3');
-      header?.classList.add('py-6');
+      header?.classList.remove('bg-white/90', 'backdrop-blur-lg', 'shadow-xl', 'py-2');
+      header?.classList.add('py-3', 'md:py-6');
     }
   });
 </script>
