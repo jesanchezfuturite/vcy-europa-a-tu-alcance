@@ -13,6 +13,19 @@
 
   <div class="container mx-auto px-4 z-10 text-center text-white pt-32 md:pt-0 relative">
 
+    <!-- Logo: Centered on mobile, Floating on desktop -->
+    <div class="md:absolute md:left-4 lg:left-12 md:-top-6 z-20 flex justify-center mb-8 md:mb-0">
+      <a href="#" class="relative group block">
+        <!-- Persistent Glow Container -->
+        <div class="absolute inset-0 bg-white/10 blur-[20px] rounded-full scale-110 transition-opacity duration-700 pointer-events-none group-hover:bg-white/20"></div>
+        <img 
+          src="/images/vcy-logo-bco.png" 
+          alt="VCY Logo" 
+          class="h-24 lg:h-40 relative transition-all duration-500 group-hover:scale-105 logo-glow"
+        />
+      </a>
+    </div>
+
     <h1 class="text-3xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
       Cumple tu sueño de conocer, <br class="hidden md:block" />
       <span class="text-purple-300">Europa este 2027</span>
@@ -56,5 +69,18 @@
   }
   .animate-fade-in {
     animation: fadeIn 1s ease-out forwards;
+  }
+  .logo-glow {
+    filter: 
+      drop-shadow(0 0 3px rgba(255, 255, 255, 0.4))
+      drop-shadow(0 0 10px rgba(91, 74, 122, 0.5))
+      drop-shadow(0 0 20px rgba(91, 74, 122, 0.3));
+    transition: filter 0.5s ease;
+  }
+  .group:hover .logo-glow {
+    filter: 
+      drop-shadow(0 0 4px rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 15px rgba(91, 74, 122, 0.7))
+      drop-shadow(0 0 25px rgba(91, 74, 122, 0.5));
   }
 </style>
