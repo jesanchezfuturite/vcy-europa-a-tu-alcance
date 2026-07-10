@@ -16,6 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const BREVO_API_KEY = import.meta.env.BREVO_API_KEY || process.env.BREVO_API_KEY;
+    const CONTACT_WEBHOOK_URL = import.meta.env.CONTACT_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL;
 
     if (!BREVO_API_KEY) {
       console.warn('BREVO_API_KEY no detectada en import.meta.env ni process.env');
@@ -81,6 +82,24 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
+    let webhookResponse: Response | null = null;
+    if (CONTACT_WEBHOOK_URL) {
+      webhookResponse = await fetch(CONTACT_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: name,
+          telefono: phone,
+          correo: email,
+          origen: 'Europa a tu alcance',
+        }),
+      });
+    } else {
+      console.warn('CONTACT_WEBHOOK_URL no detectada en import.meta.env ni process.env');
+    }
+
     if (!contactResponse.ok) {
       const contactError = await contactResponse.json();
       console.error('Error Brevo (Contacts):', contactError);
@@ -91,9 +110,14 @@ export const POST: APIRoute = async ({ request }) => {
       console.error('Error Brevo (SMTP):', emailError);
     }
 
-    if (!contactResponse.ok || !emailResponse.ok) {
+    if (webhookResponse && !webhookResponse.ok) {
+      const webhookError = await webhookResponse.text();
+      console.error('Error Webhook contacto:', webhookError);
+    }
+
+    if (!contactResponse.ok || !emailResponse.ok || (webhookResponse && !webhookResponse.ok)) {
       return new Response(
-        JSON.stringify({ message: 'Error en la integración con Brevo' }),
+        JSON.stringify({ message: 'Error en la integración del contacto' }),
         { status: 500 }
       );
     }
