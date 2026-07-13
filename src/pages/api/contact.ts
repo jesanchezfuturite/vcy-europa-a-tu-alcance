@@ -82,23 +82,27 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
-    let webhookResponse: Response | null = null;
-    if (CONTACT_WEBHOOK_URL) {
-      webhookResponse = await fetch(CONTACT_WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          nombre: name,
-          telefono: phone,
-          correo: email,
-          origen: 'Europa a tu alcance',
-        }),
-      });
-    } else {
-      console.warn('CONTACT_WEBHOOK_URL no detectada en import.meta.env ni process.env');
+    // El webhook es obligatorio: sin él no se considera exitoso el registro.
+    if (!CONTACT_WEBHOOK_URL) {
+      console.error('CONTACT_WEBHOOK_URL no detectada en import.meta.env ni process.env');
+      return new Response(
+        JSON.stringify({ message: 'Error en la integración del contacto' }),
+        { status: 500 }
+      );
     }
+
+    const webhookResponse = await fetch(CONTACT_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        nombre: name,
+        telefono: phone,
+        correo: email,
+        origen: 'Europa a tu alcance',
+      }),
+    });
 
     if (!contactResponse.ok) {
       const contactError = await contactResponse.json();
@@ -110,12 +114,12 @@ export const POST: APIRoute = async ({ request }) => {
       console.error('Error Brevo (SMTP):', emailError);
     }
 
-    if (webhookResponse && !webhookResponse.ok) {
+    if (!webhookResponse.ok) {
       const webhookError = await webhookResponse.text();
       console.error('Error Webhook contacto:', webhookError);
     }
 
-    if (!contactResponse.ok || !emailResponse.ok || (webhookResponse && !webhookResponse.ok)) {
+    if (!contactResponse.ok || !emailResponse.ok || !webhookResponse.ok) {
       return new Response(
         JSON.stringify({ message: 'Error en la integración del contacto' }),
         { status: 500 }
