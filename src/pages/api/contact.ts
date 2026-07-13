@@ -34,27 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
       normalizedPhone = `+52${normalizedPhone}`;
     }
 
-    // 1. Add Contact to Brevo
-    const contactResponse = await fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'api-key': BREVO_API_KEY,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        attributes: {
-          NOMBRE: name,
-          WHATSAPP: normalizedPhone,
-          ORIGEN: 'Europa a tu Alcance 2027'
-        },
-        listIds: [3],
-        updateEnabled: true,
-      }),
-    });
-
-    // 2. Send Transactional Email to Agency
+    // Send Transactional Email to Agency
     const emailResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -104,11 +84,6 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
-    if (!contactResponse.ok) {
-      const contactError = await contactResponse.json();
-      console.error('Error Brevo (Contacts):', contactError);
-    }
-
     if (!emailResponse.ok) {
       const emailError = await emailResponse.json();
       console.error('Error Brevo (SMTP):', emailError);
@@ -119,7 +94,7 @@ export const POST: APIRoute = async ({ request }) => {
       console.error('Error Webhook contacto:', webhookError);
     }
 
-    if (!contactResponse.ok || !emailResponse.ok || !webhookResponse.ok) {
+    if (!emailResponse.ok || !webhookResponse.ok) {
       return new Response(
         JSON.stringify({ message: 'Error en la integración del contacto' }),
         { status: 500 }
