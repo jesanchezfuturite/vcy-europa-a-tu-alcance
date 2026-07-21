@@ -1,5 +1,7 @@
 ---
+const SHOW_CONTACT_FORM = false;
 ---
+{SHOW_CONTACT_FORM && (
 <section id="formulario-contacto" class="py-24 bg-purple-deep text-white relative overflow-hidden">
   <!-- Decorative elements -->
   <div class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
@@ -81,6 +83,7 @@
     </div>
   </div>
 </section>
+)}
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
